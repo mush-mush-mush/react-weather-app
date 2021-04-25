@@ -4,8 +4,10 @@ import CurrentWeather from './components/CurrentWeather';
 import Forecast from './components/Forecast';
 import Searchbar from './components/Searchbar';
 
-const APIKey = '3f3eb6c14713b6b1786ade42ba35b801';
-const baseURL = 'http://api.openweathermap.org/data/2.5/'
+require('dotenv').config();
+
+const APIKey = process.env.REACT_APP_OW_APIKEY;
+const baseURL = process.env.REACT_APP_OW_BASEURL;
 
 function App() {
   const [query, setQuery] = useState('');
@@ -14,15 +16,13 @@ function App() {
   const [color, setColor] = useState('clear');
 
   useEffect(() => {
-    const apiKey = 'e5900cf87c5ff143e019f122728647175b4155d17ff037d2392a71a5';
-
     const getDefaultLocation = async () => {
-      const data = await fetch(`https://api.ipdata.co?api-key=${apiKey}`).then(res => res.json())
+      const data = await fetch(`${process.env.REACT_APP_IP_BASEURL}${process.env.REACT_APP_IP_APIKEY}`).then(res => res.json())
       fetchWeatherData(data.city)
     }
     getDefaultLocation();
 
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const search = async evt => {
     if (evt.key === 'Enter') {
@@ -42,18 +42,22 @@ function App() {
 
       setWeather(weather);
       setForecast(forecast);
-      if (weather.weather[0].id >= 200) setColor('thunder');
-      if (weather.weather[0].id >= 300) setColor('drizzle');
-      if (weather.weather[0].id >= 500) setColor('rain');
-      if (weather.weather[0].id >= 600) setColor('snow');
-      if (weather.weather[0].id >= 700) setColor('atmosphere');
-      if (weather.weather[0].id === 800) setColor('sunny');
-      if (weather.weather[0].id === 800 && weather.weather[0].icon === '01n') setColor('sunny-night');
-      if (weather.weather[0].id >= 801) setColor('clear');
+      setWeatherColor();
     }
     catch (err) {
       console.log(err);
     };
+  }
+
+  const setWeatherColor = () => {
+    if (weather.weather[0].id >= 200) setColor('thunder');
+    if (weather.weather[0].id >= 300) setColor('drizzle');
+    if (weather.weather[0].id >= 500) setColor('rain');
+    if (weather.weather[0].id >= 600) setColor('snow');
+    if (weather.weather[0].id >= 700) setColor('atmosphere');
+    if (weather.weather[0].id === 800) setColor('sunny');
+    if (weather.weather[0].id === 800 && weather.weather[0].icon === '01n') setColor('sunny-night');
+    if (weather.weather[0].id >= 801) setColor('clear');
   }
 
   const getDate = (d, opt = {
