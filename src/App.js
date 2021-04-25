@@ -22,7 +22,7 @@ function App() {
     }
     getDefaultLocation();
 
-  }, []);
+  });
 
   const search = async evt => {
     if (evt.key === 'Enter') {
