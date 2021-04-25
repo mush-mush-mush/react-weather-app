@@ -4,111 +4,262 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   font-family: 'Rubik', sans-serif;
 }
 
-.App {
+h1 {
+  font-size: 5.4rem;
+}
+
+h2 {
+  font-size: 3.2rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+}
+
+p {
+  font-size: 1.8rem;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100%;
-  background-color: #f0f0f0;
+
+  background: linear-gradient(-45deg, #f0f0f0 0%, #ffffff 100%);
 }
 
-main {
-  background: linear-gradient(45deg, #0094f0 0%, #61baff 100%);
-  background-size: cover;
-  background-position: bottom;
-  width: 400px;
-  height: 600px;
-  padding: 25px;
+.container {
+  width: 880px;
+  height: 520px;
+
+  display: flex;
+  overflow: hidden;
+  
+  background-color: #ffffff;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
-  transition: 1s ease-in;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-main.warm {
-  background: linear-gradient(45deg, #f9b06c 0%, #f67e7e 100%);
+.column--left, .column--right {
+  width: 50%;
+  height: 520px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  transition: .4s ease-in-out;
 }
 
-main.storm {
-  background: linear-gradient(45deg, #5f7c95 0%, #394c65 100%);
-  ;
-}
-
-.search-box {
+.search {
   width: 100%;
-  margin: 0 0 75px;
 }
 
-.search-box .search-bar {
+.search--bar {
   width: 100%;
-  padding: 15px;
-
-  appearance: none;
-  background: none;
+  padding: 10px 15px;
   border: none;
-  outline: none;
-
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
-
-  color: #313131;
-  font-size: 20px;
-
-  transition: 0.4s ease-out;
-}
-
-.search-box .search-bar:focus {
-  background-color: rgba(255, 255, 255, 0.75);
-}
-
-.location-box .location {
-  color: #ffffff;
-  font-size: 32px;
-  font-weight: 500;
-  text-align: center;
-  text-shadow: 3px 3px rgba(50, 50, 70, 0.6);
-}
-
-.location-box .date {
-  color: #ffffff;
-  font-size: 18px;
-  font-weight: 300;
-  text-align: center;
-}
-
-.weather-box {
-  text-align: center;
-}
-
-.weather-box .temp {
-  position: relative;
-  display: inline-block;
-  margin: 30px auto;
-  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
-  padding: 15px 25px;
-  color: #ffffff;
-  font-size: 72px;
-  font-weight: 900;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+  font-size: 2.4rem;
+  appearance: none;
+  opacity: 0.5;
+  transition: .2s ease-out;
+  color: #707070;
+}
+
+.search--bar:focus {
+  outline: none;
+  opacity: 1;
+}
+
+.current-weather {
+  margin: 7rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
-}
-
-.weather-box .weather {
   color: #ffffff;
-  font-size: 48px;
-  font-weight: 700;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-@media only screen and (max-width: 576px) {
-    main {
-      width: 100%;
-      height: 100vh;
-    }
+.current-weather--location {
+  font-weight: 700;
+}
+
+.current-weather--date {
+  font-weight: 300;
+}
+
+.current-weather--icon {
+  width: 10rem;
+  height: 10rem;
+  -webkit-filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+}
+
+.current-weather--temp {
+  font-weight: 900;
+}
+
+.current-weather--weather {
+  font-weight: 700;
+}
+
+.column--right {
+  color: #707070;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.forecast--header {
+  margin-bottom: 1.6rem;
+}
+
+.forecast-container {
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.8;
+  margin-bottom: 1.6rem;
+}
+
+.forecast-box {
+  color: #ffffff;
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  transition: 0.4s ease-in-out;
+}
+
+.forecast-box img {
+  width: 80px;
+  height: 80px;
+}
+
+.addInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.addInfo--header{
+  margin-bottom: 1.6rem;
+}
+
+.addInfo--container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.addInfo-item {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.addInfo-item--text-value {
+  opacity: 0.8;
+}
+
+.timezone {
+  text-align: center;
+  margin-top: auto;
+}
+
+.me:link,
+.me:visited {
+  width: 100px;
+  display: block;
+  background-color: #dfdfdf;
+  padding: 5px 2px;
+  margin: 10px auto;
+  text-align: center;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.clear {
+  background: linear-gradient(-45deg, hsla(206, 100%, 48%, 0.5) 0%, hsla(206, 100%, 69%, 0.5) 100%);
+}
+
+.sunny {
+  background: linear-gradient(-45deg, hsla(29, 92%, 70%, 1) 0%, hsla(0, 87%, 73%, 1) 100%);
+}
+
+.atmosphere {
+  background: linear-gradient(-45deg, hsla(222, 18%, 82%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+}
+
+.snow {
+  background: linear-gradient(-45deg, hsla(186, 33%, 94%, 1) 0%, hsla(193, 100%, 87%, 1) 100%);
+}
+
+.rain {
+  background: linear-gradient(-45deg, hsla(196, 37%, 68%, 1) 0%, hsla(203, 99%, 50%, 1) 100%);
+}
+
+.drizzle {
+  background: linear-gradient(-45deg, hsla(196, 100%, 89%, 1) 0%, hsla(195, 100%, 75%, 1) 100%);
+}
+
+.thunder {
+  background: linear-gradient(-45deg, hsla(211, 43%, 61%, 1) 0%, hsla(221, 29%, 47%, 1) 100%);
+}
+
+.sunny-night {
+  background: linear-gradient(-45deg, hsla(206, 52%, 43%, 1) 0%, hsla(207, 39%, 59%, 1) 100%);
+}
+
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 9px;
+  }
+
+  .container {
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    border-radius: 0;
+    overflow: auto;
+  }
+
+  .column--left, .column--right {
+    padding: 3rem 8rem;
+    width: 100%;
+  }
+
+  .timezone {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  html {
+    font-size: 8px;
+  }
+  
+  .column--left, .column--right {
+    padding: 2.8rem;
+  }
 }
