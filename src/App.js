@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AdditionalInfo from './components/AdditionalInfo';
+import Alert from './components/Alert';
 import CurrentWeather from './components/CurrentWeather';
 import Forecast from './components/Forecast';
 import Searchbar from './components/Searchbar';
+
+import WeatherIcon from './assets/weather-1.png';
+
 
 require('dotenv').config();
 
@@ -42,22 +46,19 @@ function App() {
 
       setWeather(weather);
       setForecast(forecast);
-      setWeatherColor();
+
+      if (weather.weather[0].id >= 200) setColor('thunder');
+      if (weather.weather[0].id >= 300) setColor('drizzle');
+      if (weather.weather[0].id >= 500) setColor('rain');
+      if (weather.weather[0].id >= 600) setColor('snow');
+      if (weather.weather[0].id >= 700) setColor('atmosphere');
+      if (weather.weather[0].id === 800) setColor('sunny');
+      if (weather.weather[0].id === 800 && weather.weather[0].icon === '01n') setColor('sunny-night');
+      if (weather.weather[0].id >= 801) setColor('clear');
     }
     catch (err) {
       console.log(err);
     };
-  }
-
-  const setWeatherColor = () => {
-    if (weather.weather[0].id >= 200) setColor('thunder');
-    if (weather.weather[0].id >= 300) setColor('drizzle');
-    if (weather.weather[0].id >= 500) setColor('rain');
-    if (weather.weather[0].id >= 600) setColor('snow');
-    if (weather.weather[0].id >= 700) setColor('atmosphere');
-    if (weather.weather[0].id === 800) setColor('sunny');
-    if (weather.weather[0].id === 800 && weather.weather[0].icon === '01n') setColor('sunny-night');
-    if (weather.weather[0].id >= 801) setColor('clear');
   }
 
   const getDate = (d, opt = {
@@ -77,21 +78,28 @@ function App() {
   return (
     <div className='app'>
       <main className='container'>
-        <div className={`column--left ${color}`}>
+        <div className={`column--left ${color} ${typeof weather.main == "undefined" ? 'full' : ''}`}>
           <Searchbar setQuery={setQuery} search={search} />
           {typeof weather.main !== "undefined" ? (
             <CurrentWeather city={weather.name} country={weather.sys.country} date={getDate(new Date())} icon={weather.weather[0].icon} temp={weather.main.temp} weather={weather.weather[0].main} />
-          ) : ('')}
+          ) : (
+            <>
+              <Alert />
+              <a href='https://github.com/mush-mush-mush' className='me'>@mush-mush-mush</a>
+            </>
+          )}
         </div>
-        <div className='column--right'>
+        <div className={`column--right ${typeof weather.main == "undefined" ? 'none' : ''}`}>
           {typeof forecast.list !== "undefined" ? (
             <>
-              <Forecast weather={weather} forecast={forecast} getDate={getDate}/>
+              <Forecast weather={weather} forecast={forecast} getDate={getDate} />
               <AdditionalInfo weather={weather} getDate={getDate} />
               <p className='timezone'>Current timezone {Intl.DateTimeFormat().resolvedOptions().timeZone}</p>
               <a href='https://github.com/mush-mush-mush' className='me'>@mush-mush-mush</a>
             </>
-          ) : ('')}
+          ) : (
+            <img src={WeatherIcon} className='alert--icon alert--icon-right' alt=''></img>
+          )}
         </div>
       </main>
     </div>

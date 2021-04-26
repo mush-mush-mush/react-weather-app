@@ -188,7 +188,7 @@ p {
 
 .me:link,
 .me:visited {
-  width: 100px;
+  width: 12rem;
   display: block;
   background-color: #dfdfdf;
   padding: 5px 2px;
@@ -197,10 +197,39 @@ p {
   border-radius: 3px;
   text-decoration: none;
   color: #ffffff;
+  opacity: 0.5;
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  margin: auto 0;
+}
+
+.alert--arrow {
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1rem;
+}
+
+.alert--icon {
+  width: 15rem;
+  height: 15rem;
+  margin-top: 2.5rem;
+  opacity: 0.2;
+}
+
+.alert--icon {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .clear {
-  background: linear-gradient(-45deg, hsla(206, 100%, 48%, 0.5) 0%, hsla(206, 100%, 69%, 0.5) 100%);
+  background: linear-gradient(-45deg, rgba(0, 139, 245, 0.5) 0%, rgba(97, 186, 255, 0.5) 100%);
 }
 
 .sunny {
@@ -262,4 +291,13 @@ p {
   .column--left, .column--right {
     padding: 2.8rem;
   }
+
+  .full {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+.none {
+  display: none;
+}
 }
